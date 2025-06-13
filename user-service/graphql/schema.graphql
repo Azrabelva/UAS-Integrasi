@@ -1,0 +1,14 @@
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+type Mutation {
+  createUser(name: String!, email: String!, password: String!): User
+    @field(resolver: "App\\GraphQL\\Mutations\\CreateUser")
+}
+
+type Query {
+  users: [User!]! @all
+}

@@ -1,0 +1,30 @@
+scalar DateTime
+
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+  stock: Int!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type Query {
+  products: [Product!]! @all(model: "App\\Models\\Product")
+  product(id: ID!): Product @find(model: "App\\Models\\Product")
+}
+
+type Mutation {
+  createProduct(
+    name: String!
+    description: String
+    price: Float!
+    stock: Int!
+  ): Product @create(model: "App\\Models\\Product")
+
+  reduceStock(
+    id: ID!
+    qty: Int!
+  ): Product @field(resolver: "App\\GraphQL\\Resolvers\\ProductResolver@reduceStock")
+}
