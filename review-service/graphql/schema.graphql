@@ -1,0 +1,15 @@
+type Review {
+  id: ID!
+  content: String!
+  rating: Int!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type Query {
+  reviews: [Review!]! @all
+}
+
+type Mutation {
+  createReview(content: String!, rating: Int!): Review @create
+}

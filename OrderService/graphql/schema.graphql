@@ -1,0 +1,27 @@
+scalar DateTime
+
+type Order {
+  id: ID!
+  product_id: Int!
+  quantity: Int!
+  price: Int!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input CreateOrderInput {
+  product_id: Int!
+  quantity: Int!
+  price: Int!
+}
+
+type Query {
+  orders: [Order!]! @all(model: "App\\Models\\Order")
+  order(id: ID!): Order @find(model: "App\\Models\\Order")
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order @create(model: "App\\Models\\Order")
+  updateOrder(id: ID!, product_id: Int!, quantity: Int!, price: Int!): Order @update(model: "App\\Models\\Order")
+  deleteOrder(id: ID!): Order @delete(model: "App\\Models\\Order")
+}
